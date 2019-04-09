@@ -29,7 +29,7 @@ class TableVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Students.studentLocations.count
+        return Students.shared.studentLocations.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,7 +38,7 @@ class TableVC: UITableViewController {
         // Configure the cell...
         cell.imageView?.image = UIImage(named: "icon_pin")
         
-        let student = Students.studentLocations[indexPath.row]
+        let student = Students.shared.studentLocations[indexPath.row]
         cell.textLabel?.text = (student.firstName ?? "") + " " + (student.lastName ?? "")
         cell.detailTextLabel?.text = student.updatedAt
         
@@ -46,7 +46,7 @@ class TableVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let toOpen = Students.studentLocations[indexPath.row].mediaURL {
+        if let toOpen = Students.shared.studentLocations[indexPath.row].mediaURL {
             UIApplication.shared.open(URL(string: toOpen)!)
         } else {
             performUIUpdatesOnMain {

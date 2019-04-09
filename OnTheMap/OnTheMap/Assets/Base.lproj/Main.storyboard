@@ -242,7 +242,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.31550469990000002" green="0.69490689039999998" blue="0.88238316770000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" textContentType="url"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LTc-qt-ftI">
                                 <rect key="frame" x="130" y="615" width="115" height="30"/>

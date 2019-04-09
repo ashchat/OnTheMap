@@ -27,7 +27,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
         self.map.removeAnnotations(annotations)
         annotations = [MKPointAnnotation]()
         
-        for location in Students.studentLocations {
+        for location in Students.shared.studentLocations {
             let lat = CLLocationDegrees(location.latitude ?? 0)
             let long = CLLocationDegrees(location.longitude ?? 0)
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -41,7 +41,7 @@ class MapVC: UIViewController, MKMapViewDelegate {
             annotation.title = first + " " + last
             annotation.subtitle = mediaURL
             
-            if location.objectId == Students.userLocation?.objectId {
+            if location.objectId == Students.shared.userLocation?.objectId {
                 userPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "pin")
             }
             

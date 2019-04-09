@@ -29,7 +29,7 @@ class AddLocationVC: UIViewController {
         urlTextField.delegate = self
         map.delegate = self
         
-        isPutRequest = (Students.userLocation != nil) ? true : false
+        isPutRequest = (Students.shared.userLocation != nil) ? true : false
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -48,7 +48,7 @@ class AddLocationVC: UIViewController {
         })
         
         if isPutRequest! {
-            ParseClient.taskForPUTStudentLocation(objectId: (Students.userLocation?.objectId)!, body: body) { (response, error) in
+            ParseClient.taskForPUTStudentLocation(objectId: (Students.shared.userLocation?.objectId)!, body: body) { (response, error) in
                 if error != nil {
                     performUIUpdatesOnMain {
                         showAlert(controller: self, title: "Could Not Upload Location", error: ErrorMessages.unsuccessfulLocation.stringValue, actions: [okayAlertAction])
@@ -183,6 +183,11 @@ extension AddLocationVC: UITextFieldDelegate {
         getLocation()
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        getLocation()
+        textField.resignFirstResponder()
     }
     
 }

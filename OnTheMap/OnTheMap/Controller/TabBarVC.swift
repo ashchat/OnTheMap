@@ -36,7 +36,7 @@ class TabBarVC: UITabBarController {
                 self.refreshButton.isEnabled = true
                 stopActivityIndicator()
                 
-                Students.studentLocations = (response?.StudentLocations)!
+                Students.shared.studentLocations = (response?.StudentLocations)!
                 NotificationCenter.default.post(name: .updateLocations, object: nil)
             } else {
                 self.addButton.isEnabled = true
@@ -54,7 +54,7 @@ class TabBarVC: UITabBarController {
     func getUserLocation() {
         ParseClient.taskForGETStudentLocation(uniqueKey: Students.userData?.key) { (response, error) in
             if response != nil {
-                Students.userLocation = response?.StudentLocations.first
+                Students.shared.userLocation = response?.StudentLocations.first
             }
         }
     }
@@ -75,7 +75,7 @@ class TabBarVC: UITabBarController {
     }
     
     func handleAdd() {
-        if Students.userLocation != nil {
+        if Students.shared.userLocation != nil {
             let overwrite = UIAlertAction(title: "Overwrite", style: .default) { (action) in
                 self.segueToAddVC()
             }

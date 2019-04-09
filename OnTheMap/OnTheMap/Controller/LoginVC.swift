@@ -65,12 +65,13 @@ class LoginVC: UIViewController {
                             
                             ParseClient.taskForGETStudentLocation(uniqueKey: Students.uniqueKey, completion: { (response, error) in
                                 if response != nil {
-                                    Students.userLocation = response?.StudentLocations.first
+                                    Students.shared.userLocation = response?.StudentLocations.first
                                 }
                                 performUIUpdatesOnMain {
                                     stopActivityIndicator()
                                     self.performSegue(withIdentifier: "loginSuccessful", sender: nil)
                                     self.unsubscribeToKeyboardNotifications()
+                                    self.passwordTextField.text = ""
                                 }
                             })
                             
