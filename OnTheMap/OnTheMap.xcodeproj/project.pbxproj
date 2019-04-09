@@ -17,6 +17,7 @@
 		C3409906225714E6000EB971 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3409905225714E6000EB971 /* UserData.swift */; };
 		C340990822571B98000EB971 /* AddLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C340990722571B98000EB971 /* AddLocationVC.swift */; };
 		C340990A2258164A000EB971 /* AddLocationVCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34099092258164A000EB971 /* AddLocationVCButton.swift */; };
+		C340990C225BC9DD000EB971 /* Students.swift in Sources */ = {isa = PBXBuildFile; fileRef = C340990B225BC9DD000EB971 /* Students.swift */; };
 		C3D91DFC22406C1F001CDFC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D91DFB22406C1F001CDFC8 /* AppDelegate.swift */; };
 		C3D91E0122406C1F001CDFC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D91DFF22406C1F001CDFC8 /* Main.storyboard */; };
 		C3D91E0322406C23001CDFC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D91E0222406C23001CDFC8 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		C3409905225714E6000EB971 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		C340990722571B98000EB971 /* AddLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationVC.swift; sourceTree = "<group>"; };
 		C34099092258164A000EB971 /* AddLocationVCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationVCButton.swift; sourceTree = "<group>"; };
+		C340990B225BC9DD000EB971 /* Students.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Students.swift; sourceTree = "<group>"; };
 		C3D91DF822406C1F001CDFC8 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3D91DFB22406C1F001CDFC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3D91E0022406C1F001CDFC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				C3D91E1722407601001CDFC8 /* StudentLocation.swift */,
+				C340990B225BC9DD000EB971 /* Students.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				C3D91DFC22406C1F001CDFC8 /* AppDelegate.swift in Sources */,
 				C3D91E2022424656001CDFC8 /* StudentLocationPOSTResponse.swift in Sources */,
 				C34098FA225405A6000EB971 /* MapVC.swift in Sources */,
+				C340990C225BC9DD000EB971 /* Students.swift in Sources */,
 				C34098F0224C227A000EB971 /* UdacityClient.swift in Sources */,
 				C3409906225714E6000EB971 /* UserData.swift in Sources */,
 				C3D91E2A22430BD5001CDFC8 /* LoginRequest.swift in Sources */,

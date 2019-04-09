@@ -84,6 +84,12 @@ class ParseClient {
             do {
                 let decoder = JSONDecoder()
                 let responseObject = try decoder.decode(StudentLocationPOSTResponse.self, from: data)
+                if (responseObject.createdAt == nil || responseObject.objectId == nil) {
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                    return
+                }
                 DispatchQueue.main.async {
                     completion(responseObject, nil)
                 }

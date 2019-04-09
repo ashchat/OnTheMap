@@ -43,21 +43,29 @@ class LoginVC: UIViewController {
     
     func loginToUdacity() {
         
+        if emailTextField.text == "" || passwordTextField.text == "" {
+            performUIUpdatesOnMain {
+                stopActivityIndicator()
+                showAlert(controller: self, title: "Invalid Credentials", error: ErrorMessages.loginError.stringValue, actions: [okayAlertAction])
+            }
+            return
+        }
+        
         callActivityIndicator(view: self.view)
         
         if checkForInternet() {
             let login = LoginRequest(username: emailTextField.text ?? "", password: passwordTextField.text ?? "")
             UdacityClient.taskForPOSTSession(body: login) { (response, error) in
                 if response != nil {
-                    uniqueKey = (response?.account.key)!
+                    Students.uniqueKey = (response?.account.key)!
                     
-                    UdacityClient.taskForGETUserData(userId: uniqueKey, completion: { (response, error) in
+                    UdacityClient.taskForGETUserData(userId: Students.uniqueKey, completion: { (response, error) in
                         if response != nil {
-                            userData = response
+                            Students.userData = response
                             
-                            ParseClient.taskForGETStudentLocation(uniqueKey: uniqueKey, completion: { (response, error) in
+                            ParseClient.taskForGETStudentLocation(uniqueKey: Students.uniqueKey, completion: { (response, error) in
                                 if response != nil {
-                                    userLocation = response?.StudentLocations.first
+                                    Students.userLocation = response?.StudentLocations.first
                                 }
                                 performUIUpdatesOnMain {
                                     stopActivityIndicator()
@@ -105,7 +113,7 @@ extension LoginVC: UITextFieldDelegate {
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        view.frame.origin.y += 0.3*getKeyboardHeight(notification)
+        view.frame.origin.y = UIScreen.main.bounds.origin.y
     }
     
     func getKeyboardHeight(_ notification: Notification) -> CGFloat {

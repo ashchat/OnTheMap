@@ -29,7 +29,7 @@ class AddLocationVC: UIViewController {
         urlTextField.delegate = self
         map.delegate = self
         
-        isPutRequest = (userLocation != nil) ? true : false
+        isPutRequest = (Students.userLocation != nil) ? true : false
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -42,13 +42,18 @@ class AddLocationVC: UIViewController {
     
     func handleSubmit() {
         
-        let body = StudentLocationRequest(firstName: userData?.firstname, lastName: userData?.lastname, latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude, location: self.locationString, mediaURL: urlTextField.text, uniqueKey: userData?.key)
+        let body = StudentLocationRequest(firstName: Students.userData?.firstname, lastName: Students.userData?.lastname, latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude, location: self.locationString, mediaURL: urlTextField.text, uniqueKey: Students.userData?.key)
         let continueAlertAction = UIAlertAction(title: "Continue", style: .default, handler: { (action) in
             self.performSegue(withIdentifier: "unwindToTBVC", sender: self)
         })
         
         if isPutRequest! {
-            ParseClient.taskForPUTStudentLocation(objectId: (userLocation?.objectId)!, body: body) { (response, error) in
+            ParseClient.taskForPUTStudentLocation(objectId: (Students.userLocation?.objectId)!, body: body) { (response, error) in
+                if error != nil {
+                    performUIUpdatesOnMain {
+                        showAlert(controller: self, title: "Could Not Upload Location", error: ErrorMessages.unsuccessfulLocation.stringValue, actions: [okayAlertAction])
+                    }
+                }
                 if response != nil {
                     performUIUpdatesOnMain {
                         showAlert(controller: self, title: "Successfully Updated Location", error: ErrorMessages.successfulLocation.stringValue, actions: [continueAlertAction])
@@ -61,6 +66,11 @@ class AddLocationVC: UIViewController {
             }
         } else {
             ParseClient.taskForPOSTStudentLocation(body: body) { (response, error) in
+                if error != nil {
+                    performUIUpdatesOnMain {
+                        showAlert(controller: self, title: "Could Not Upload Location", error: ErrorMessages.unsuccessfulLocation.stringValue, actions: [okayAlertAction])
+                    }
+                }
                 if response != nil {
                     performUIUpdatesOnMain {
                         showAlert(controller: self, title: "Successfully Updated Location", error: ErrorMessages.successfulLocation.stringValue, actions: [continueAlertAction])

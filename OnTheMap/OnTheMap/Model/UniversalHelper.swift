@@ -10,12 +10,6 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
-// Universal variables to be used for consistency and prevent unnecessary memory usage
-var studentLocations = [StudentLocation]()
-var uniqueKey = ""
-var userLocation: StudentLocation?
-var userData: UserData?
-
 // Universal Alert Popup function to be reused anywhere in the app
 let okayAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
 let cancelAlertAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
