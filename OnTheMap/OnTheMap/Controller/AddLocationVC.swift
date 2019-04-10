@@ -20,6 +20,7 @@ class AddLocationVC: UIViewController {
     var isPutRequest: Bool?
     var annotation = MKPointAnnotation()
     var locationString: String?
+    var isValidLocation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,11 @@ class AddLocationVC: UIViewController {
     
     func handleSubmit() {
         
+        if !self.isValidLocation {
+            showAlert(controller: self, title: "Invalid Location", error: ErrorMessages.invalidLocation.stringValue, actions: [okayAlertAction])
+            return
+        }
+        
         let body = StudentLocationRequest(firstName: Students.userData?.firstname, lastName: Students.userData?.lastname, latitude: self.annotation.coordinate.latitude, longitude: self.annotation.coordinate.longitude, location: self.locationString, mediaURL: urlTextField.text, uniqueKey: Students.userData?.key)
         let continueAlertAction = UIAlertAction(title: "Continue", style: .default, handler: { (action) in
             self.performSegue(withIdentifier: "unwindToTBVC", sender: self)
@@ -52,6 +58,7 @@ class AddLocationVC: UIViewController {
                 if error != nil {
                     performUIUpdatesOnMain {
                         showAlert(controller: self, title: "Could Not Upload Location", error: ErrorMessages.unsuccessfulLocation.stringValue, actions: [okayAlertAction])
+                        return
                     }
                 }
                 if response != nil {
@@ -69,6 +76,7 @@ class AddLocationVC: UIViewController {
                 if error != nil {
                     performUIUpdatesOnMain {
                         showAlert(controller: self, title: "Could Not Upload Location", error: ErrorMessages.unsuccessfulLocation.stringValue, actions: [okayAlertAction])
+                        return
                     }
                 }
                 if response != nil {
@@ -113,12 +121,14 @@ extension AddLocationVC: MKMapViewDelegate {
                 stopActivityIndicator()
                 showAlert(controller: self, title: "Error Geocoding.", error: ErrorMessages.geocodeError.stringValue, actions: [okayAlertAction])
                 self.locationTextField.isEnabled = true
+                self.isValidLocation = false
                 return
             }
             if let placemarks = placemarks, placemarks.count > 0 {
                 location = placemarks.first?.location
             }
             
+            self.isValidLocation = true
             self.annotation.coordinate = (location?.coordinate)!
             self.annotation.title = self.locationString
             performUIUpdatesOnMain {
@@ -180,13 +190,17 @@ extension AddLocationVC: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        getLocation()
+        if textField == locationTextField {
+            getLocation()
+        }
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        getLocation()
+        if textField == locationTextField {
+            getLocation()
+        }
         textField.resignFirstResponder()
     }
     

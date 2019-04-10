@@ -93,6 +93,7 @@ enum ErrorMessages {
     case unsuccessfulLocation
     case needMoreInfo
     case cancelAddLocation
+    case invalidLocation
     
     var stringValue: String {
         switch self {
@@ -110,6 +111,7 @@ enum ErrorMessages {
         case .unsuccessfulLocation: return "Could not upload your location at this time. Please check your network connection and try again."
         case .needMoreInfo: return "Please enter both a location and a URL."
         case .cancelAddLocation: return "The data you provided will be dismissed."
+        case .invalidLocation: return "Please enter a valid location and try again. If the location doesn't appear on the map, it is not considered valid."
         }
     }
     
